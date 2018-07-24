@@ -406,6 +406,10 @@
 			var status = xhrObj.status;
 			var content = xhrObj.content || xhrObj.responseText;
 			var reset = !!(content == null && old && old.urls.include);
+			var insert = true;
+			if (elem.dataset.insert === 'false') {
+				insert = false;
+			}
 			var detail = {
 				candidate: candidate,
 				content: content,
@@ -414,7 +418,7 @@
 				xml: xhrObj.responseXML,
 				isSuccess: ('status' in xhrObj) ? status >= 200 && status < 300 || status === 304 : true,
 				oldCandidate: old,
-				insert: true,
+				insert: insert,
 				resetHTML: reset
 			};
 			var moduleObj = {target: elem, details: detail, detail: detail};
